@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fc.test.mapper.auto.SysPhysicalMapper">
+  <resultMap id="BaseResultMap" type="com.fc.test.model.auto.SysPhysical">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="height" jdbcType="VARCHAR" property="height" />
+    <result column="weight" jdbcType="VARCHAR" property="weight" />
+    <result column="bmi" jdbcType="VARCHAR" property="bmi" />
+    <result column="fat" jdbcType="VARCHAR" property="fat" />
+    <result column="muscle" jdbcType="VARCHAR" property="muscle" />
+    <result column="moisture" jdbcType="VARCHAR" property="moisture" />
+    <result column="protein" jdbcType="VARCHAR" property="protein" />
+    <result column="bone" jdbcType="VARCHAR" property="bone" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="course_id" jdbcType="INTEGER" property="courseId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+<sql id="Base_Column_List">
+	  	  	      	id,
+       	  	      	height,
+       	  	      	weight,
+       	  	      	bmi,
+       	  	      	fat,
+       	  	      	muscle,
+       	  	      	moisture,
+       	  	      	protein,
+       	  	      	bone,
+       	  	      	sex,
+       	  	      	age,
+       	  	      	remark,
+       	  	      	username,
+       	  	    	  	course_id
+       	</sql>
+  <select id="selectByExample" parameterType="com.fc.test.model.auto.SysPhysicalExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sys_physical
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sys_physical
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_sys_physical
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fc.test.model.auto.SysPhysicalExample">
+    delete from t_sys_physical
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  
+  <insert id="insert" parameterType="com.fc.test.model.auto.SysPhysical">
+    insert into t_sys_physical (
+      	  	       id,
+       	  	       height,
+       	  	       weight,
+       	  	       bmi,
+       	  	       fat,
+       	  	       muscle,
+       	  	       moisture,
+       	  	       protein,
+       	  	       bone,
+       	  	       sex,
+       	  	       age,
+       	  	       remark,
+       	  	       username,
+       	  	    	  course_id
+       	    )
+    values (
+	  	  	      	#{id,jdbcType=INTEGER},
+       	  	      	#{height,jdbcType=VARCHAR},
+       	  	      	#{weight,jdbcType=VARCHAR},
+       	  	      	#{bmi,jdbcType=VARCHAR},
+       	  	      	#{fat,jdbcType=VARCHAR},
+       	  	      	#{muscle,jdbcType=VARCHAR},
+       	  	      	#{moisture,jdbcType=VARCHAR},
+       	  	      	#{protein,jdbcType=VARCHAR},
+       	  	      	#{bone,jdbcType=VARCHAR},
+       	  	      	#{sex,jdbcType=VARCHAR},
+       	  	      	#{age,jdbcType=INTEGER},
+       	  	      	#{remark,jdbcType=VARCHAR},
+       	  	      	#{username,jdbcType=VARCHAR},
+       	  	    	  #{courseId,jdbcType=INTEGER}
+       	    )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.fc.test.model.auto.SysPhysical">
+    insert into t_sys_physical
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+          
+      <if test="id != null">
+        id,
+      </if>
+      
+         
+      <if test="height != null">
+        height,
+      </if>
+      
+         
+      <if test="weight != null">
+        weight,
+      </if>
+      
+         
+      <if test="bmi != null">
+        bmi,
+      </if>
+      
+         
+      <if test="fat != null">
+        fat,
+      </if>
+      
+         
+      <if test="muscle != null">
+        muscle,
+      </if>
+      
+         
+      <if test="moisture != null">
+        moisture,
+      </if>
+      
+         
+      <if test="protein != null">
+        protein,
+      </if>
+      
+         
+      <if test="bone != null">
+        bone,
+      </if>
+      
+         
+      <if test="sex != null">
+        sex,
+      </if>
+      
+         
+      <if test="age != null">
+        age,
+      </if>
+      
+         
+      <if test="remark != null">
+        remark,
+      </if>
+      
+         
+      <if test="username != null">
+        username,
+      </if>
+      
+         
+      <if test="courseId != null">
+        course_id,
+      </if>
+      
+         </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+          <if test="height != null">
+        #{height,jdbcType=VARCHAR},
+      </if>
+          <if test="weight != null">
+        #{weight,jdbcType=VARCHAR},
+      </if>
+          <if test="bmi != null">
+        #{bmi,jdbcType=VARCHAR},
+      </if>
+          <if test="fat != null">
+        #{fat,jdbcType=VARCHAR},
+      </if>
+          <if test="muscle != null">
+        #{muscle,jdbcType=VARCHAR},
+      </if>
+          <if test="moisture != null">
+        #{moisture,jdbcType=VARCHAR},
+      </if>
+          <if test="protein != null">
+        #{protein,jdbcType=VARCHAR},
+      </if>
+          <if test="bone != null">
+        #{bone,jdbcType=VARCHAR},
+      </if>
+          <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+          <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+          <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+          <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+          <if test="courseId != null">
+        #{courseId,jdbcType=INTEGER},
+      </if>
+        </trim>
+  </insert>
+  
+  <select id="countByExample" parameterType="com.fc.test.model.auto.SysPhysicalExample" resultType="java.lang.Long">
+    select count(*) from t_sys_physical
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_sys_physical
+    <set>
+          <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+          <if test="record.height != null">
+        height = #{record.height,jdbcType=VARCHAR},
+      </if>
+          <if test="record.weight != null">
+        weight = #{record.weight,jdbcType=VARCHAR},
+      </if>
+          <if test="record.bmi != null">
+        bmi = #{record.bmi,jdbcType=VARCHAR},
+      </if>
+          <if test="record.fat != null">
+        fat = #{record.fat,jdbcType=VARCHAR},
+      </if>
+          <if test="record.muscle != null">
+        muscle = #{record.muscle,jdbcType=VARCHAR},
+      </if>
+          <if test="record.moisture != null">
+        moisture = #{record.moisture,jdbcType=VARCHAR},
+      </if>
+          <if test="record.protein != null">
+        protein = #{record.protein,jdbcType=VARCHAR},
+      </if>
+          <if test="record.bone != null">
+        bone = #{record.bone,jdbcType=VARCHAR},
+      </if>
+          <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+          <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+          <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+          <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+          <if test="record.courseId != null">
+        course_id = #{record.courseId,jdbcType=INTEGER},
+      </if>
+         
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  
+  <update id="updateByExample" parameterType="map">
+    update t_sys_physical
+    set
+            	     	 id = #{record.id,jdbcType=INTEGER},
+    	         	     	 height = #{record.height,jdbcType=VARCHAR},
+    	         	     	 weight = #{record.weight,jdbcType=VARCHAR},
+    	         	     	 bmi = #{record.bmi,jdbcType=VARCHAR},
+    	         	     	 fat = #{record.fat,jdbcType=VARCHAR},
+    	         	     	 muscle = #{record.muscle,jdbcType=VARCHAR},
+    	         	     	 moisture = #{record.moisture,jdbcType=VARCHAR},
+    	         	     	 protein = #{record.protein,jdbcType=VARCHAR},
+    	         	     	 bone = #{record.bone,jdbcType=VARCHAR},
+    	         	     	 sex = #{record.sex,jdbcType=VARCHAR},
+    	         	     	 age = #{record.age,jdbcType=INTEGER},
+    	         	     	 remark = #{record.remark,jdbcType=VARCHAR},
+    	         	     	 username = #{record.username,jdbcType=VARCHAR},
+    	         	     	 course_id = #{record.courseId,jdbcType=INTEGER}
+    	         <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  
+      <update id="updateByPrimaryKeySelective" parameterType="com.fc.test.model.auto.SysPhysical">
+    update t_sys_physical
+    <set>
+                          <if test="height != null">
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+                      <if test="weight != null">
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+                      <if test="bmi != null">
+        bmi = #{bmi,jdbcType=VARCHAR},
+      </if>
+                      <if test="fat != null">
+        fat = #{fat,jdbcType=VARCHAR},
+      </if>
+                      <if test="muscle != null">
+        muscle = #{muscle,jdbcType=VARCHAR},
+      </if>
+                      <if test="moisture != null">
+        moisture = #{moisture,jdbcType=VARCHAR},
+      </if>
+                      <if test="protein != null">
+        protein = #{protein,jdbcType=VARCHAR},
+      </if>
+                      <if test="bone != null">
+        bone = #{bone,jdbcType=VARCHAR},
+      </if>
+                      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+                      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+                      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+                      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+                      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+              </set>
+    where 
+            id = #{id,jdbcType=INTEGER}
+                                                                                                                  
+  </update>
+
+      	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	
+
+  <update id="updateByPrimaryKey" parameterType="com.fc.test.model.auto.SysPhysical">
+    update t_sys_physical
+    set 
+             	        	    	 			height = #{height,jdbcType=VARCHAR},
+		     	        	    	 			weight = #{weight,jdbcType=VARCHAR},
+		     	        	    	 			bmi = #{bmi,jdbcType=VARCHAR},
+		     	        	    	 			fat = #{fat,jdbcType=VARCHAR},
+		     	        	    	 			muscle = #{muscle,jdbcType=VARCHAR},
+		     	        	    	 			moisture = #{moisture,jdbcType=VARCHAR},
+		     	        	    	 			protein = #{protein,jdbcType=VARCHAR},
+		     	        	    	 			bone = #{bone,jdbcType=VARCHAR},
+		     	        	    	 			sex = #{sex,jdbcType=VARCHAR},
+		     	        	    	 			age = #{age,jdbcType=INTEGER},
+		     	        	    	 			remark = #{remark,jdbcType=VARCHAR},
+		     	        	    	 			username = #{username,jdbcType=VARCHAR},
+		     	        	    	 			course_id = #{courseId,jdbcType=INTEGER}
+		     	        where 
+            id = #{id,jdbcType=INTEGER}
+                                                                                                                    
+  </update>
+  
+                                                                          
+</mapper>

@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fc.test.mapper.auto.SysCustomerMapper">
+  <resultMap id="BaseResultMap" type="com.fc.test.model.auto.SysCustomer">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="hobby" jdbcType="VARCHAR" property="hobby" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+<sql id="Base_Column_List">
+	  	  	      	id,
+       	  	      	nickname,
+       	  	      	age,
+       	  	      	sex,
+       	  	      	birthday,
+       	  	      	phone,
+       	  	      	address,
+       	  	      	email,
+       	  	      	hobby,
+       	  	      	user_id,
+       	  	    	  	create_date
+       	</sql>
+  <select id="selectByExample" parameterType="com.fc.test.model.auto.SysCustomerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sys_customer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_sys_customer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_sys_customer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fc.test.model.auto.SysCustomerExample">
+    delete from t_sys_customer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  
+  <insert id="insert" parameterType="com.fc.test.model.auto.SysCustomer">
+    insert into t_sys_customer (
+      	  	       id,
+       	  	       nickname,
+       	  	       age,
+       	  	       sex,
+       	  	       birthday,
+       	  	       phone,
+       	  	       address,
+       	  	       email,
+       	  	       hobby,
+       	  	       user_id,
+       	  	    	  create_date
+       	    )
+    values (
+	  	  	      	#{id,jdbcType=INTEGER},
+       	  	      	#{nickname,jdbcType=VARCHAR},
+       	  	      	#{age,jdbcType=INTEGER},
+       	  	      	#{sex,jdbcType=VARCHAR},
+       	  	      	#{birthday,jdbcType=TIMESTAMP},
+       	  	      	#{phone,jdbcType=VARCHAR},
+       	  	      	#{address,jdbcType=VARCHAR},
+       	  	      	#{email,jdbcType=VARCHAR},
+       	  	      	#{hobby,jdbcType=VARCHAR},
+       	  	      	#{userId,jdbcType=INTEGER},
+       	  	    	  #{createDate,jdbcType=TIMESTAMP}
+       	    )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.fc.test.model.auto.SysCustomer">
+    insert into t_sys_customer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+          
+      <if test="id != null">
+        id,
+      </if>
+      
+         
+      <if test="nickname != null">
+        nickname,
+      </if>
+      
+         
+      <if test="age != null">
+        age,
+      </if>
+      
+         
+      <if test="sex != null">
+        sex,
+      </if>
+      
+         
+      <if test="birthday != null">
+        birthday,
+      </if>
+      
+         
+      <if test="phone != null">
+        phone,
+      </if>
+      
+         
+      <if test="address != null">
+        address,
+      </if>
+      
+         
+      <if test="email != null">
+        email,
+      </if>
+      
+         
+      <if test="hobby != null">
+        hobby,
+      </if>
+      
+         
+      <if test="userId != null">
+        user_id,
+      </if>
+      
+         
+      <if test="createDate != null">
+        create_date,
+      </if>
+      
+         </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+          <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+          <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+          <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+          <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+          <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+          <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+          <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+          <if test="hobby != null">
+        #{hobby,jdbcType=VARCHAR},
+      </if>
+          <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+          <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+        </trim>
+  </insert>
+  
+  <select id="countByExample" parameterType="com.fc.test.model.auto.SysCustomerExample" resultType="java.lang.Long">
+    select count(*) from t_sys_customer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_sys_customer
+    <set>
+          <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+          <if test="record.nickname != null">
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+          <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+          <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+          <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      </if>
+          <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+          <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+          <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+          <if test="record.hobby != null">
+        hobby = #{record.hobby,jdbcType=VARCHAR},
+      </if>
+          <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+          <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+         
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  
+  <update id="updateByExample" parameterType="map">
+    update t_sys_customer
+    set
+            	     	 id = #{record.id,jdbcType=INTEGER},
+    	         	     	 nickname = #{record.nickname,jdbcType=VARCHAR},
+    	         	     	 age = #{record.age,jdbcType=INTEGER},
+    	         	     	 sex = #{record.sex,jdbcType=VARCHAR},
+    	         	     	 birthday = #{record.birthday,jdbcType=TIMESTAMP},
+    	         	     	 phone = #{record.phone,jdbcType=VARCHAR},
+    	         	     	 address = #{record.address,jdbcType=VARCHAR},
+    	         	     	 email = #{record.email,jdbcType=VARCHAR},
+    	         	     	 hobby = #{record.hobby,jdbcType=VARCHAR},
+    	         	     	 user_id = #{record.userId,jdbcType=INTEGER},
+    	         	     	 create_date = #{record.createDate,jdbcType=TIMESTAMP}
+    	         <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  
+      <update id="updateByPrimaryKeySelective" parameterType="com.fc.test.model.auto.SysCustomer">
+    update t_sys_customer
+    <set>
+                          <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+                      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+                      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+                      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+                      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+                      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+                      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+                      <if test="hobby != null">
+        hobby = #{hobby,jdbcType=VARCHAR},
+      </if>
+                      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+                      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+              </set>
+    where 
+            id = #{id,jdbcType=INTEGER}
+                                                                                          
+  </update>
+
+      	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	
+
+  <update id="updateByPrimaryKey" parameterType="com.fc.test.model.auto.SysCustomer">
+    update t_sys_customer
+    set 
+             	        	    	 			nickname = #{nickname,jdbcType=VARCHAR},
+		     	        	    	 			age = #{age,jdbcType=INTEGER},
+		     	        	    	 			sex = #{sex,jdbcType=VARCHAR},
+		     	        	    	 			birthday = #{birthday,jdbcType=TIMESTAMP},
+		     	        	    	 			phone = #{phone,jdbcType=VARCHAR},
+		     	        	    	 			address = #{address,jdbcType=VARCHAR},
+		     	        	    	 			email = #{email,jdbcType=VARCHAR},
+		     	        	    	 			hobby = #{hobby,jdbcType=VARCHAR},
+		     	        	    	 			user_id = #{userId,jdbcType=INTEGER},
+		     	        	    	 			create_date = #{createDate,jdbcType=TIMESTAMP}
+		     	        where 
+            id = #{id,jdbcType=INTEGER}
+                                                                                            
+  </update>
+  
+                                                           
+</mapper>
